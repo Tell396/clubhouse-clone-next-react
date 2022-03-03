@@ -1,5 +1,8 @@
+import { EnterPhoneStep } from '../components/steps/EnterPhoneStep/'
+
+
 export default function Room() {
     return (
-        <h1>Это Room!</h1>
+        <EnterPhoneStep />
     )
 }

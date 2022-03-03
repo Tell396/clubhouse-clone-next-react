@@ -8,6 +8,7 @@ import React from 'react'
 export const WelcomeStep = () => {
     // const {onNextStep} = React.useContext(MainContext)
 
+
     return (
         <WhiteBlock className={styles.block}>
             <h3 className={styles.title}>
@@ -19,9 +20,9 @@ export const WelcomeStep = () => {
                 finishing youches, we’re adding people gradually to make sure nothing breaks :)
             </p>
             <div>
-                <Button /* onClick={onNextStep} */ >
+                <Button /* onClick={onNextStep} */>
                     Get your username
-                    <img className="d-ib mr-10" src="/static/arrow.svg" />
+                    <img className="d-ib ml-10" src="/static/arrow.svg" />
                 </Button>
             </div>
             <div className="link mt-15 cup d-ib">Have an invite text? Sign in</div>
