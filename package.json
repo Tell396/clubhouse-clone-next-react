@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.26.0",
     "clsx": "^1.1.1",
+    "gh-pages": "^3.2.3",
     "next": "12.1.0",
     "node-sass": "^7.0.1",
     "react": "17.0.2",
@@ -18,7 +19,10 @@
     "react-number-format": "^4.9.1"
   },
   "devDependencies": {
+    "@types/node": "^17.0.21",
+    "@types/react": "^17.0.39",
     "eslint": "8.10.0",
-    "eslint-config-next": "12.1.0"
+    "eslint-config-next": "12.1.0",
+    "typescript": "^4.6.2"
   }
 }
