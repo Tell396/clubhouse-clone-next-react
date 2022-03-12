@@ -17,9 +17,9 @@ export const Header: React.FC = () => {
         </Link>
         <Link href="/profile/1">
           <div className="d-flex align-items-center cup">
-            <b className="mr-5">Archakov Dennis</b>
+            <b className="mr-5">Zubenko Mihail</b>
             <Avatar
-              src="https://sun2-3.userapi.com/s/v1/if1/CAR1Aao3yIica7xq77xIIMMTn29CME-cE5JSJBc8OTNVt29JQjnhR0ZsX_9IO-AzgwVbfgB6.jpg?size=200x0&quality=96&crop=138,44,1048,1048&ava=1"
+              src="https://i.pinimg.com/originals/b6/a2/bf/b6a2bfae90ff4c3fed3e1f1088070e04.jpg"
               width="50px"
               height="50px"
             />
