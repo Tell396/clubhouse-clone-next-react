@@ -5,16 +5,7 @@ import { ConversationCard } from '../components/ConversationCard';
 import { Header } from '../components/Header';
 import Axios from '../core/axios';
 
-export default function Rooms() {
-  const [rooms, setRooms] = React.useState([]);
-
-  React.useEffect(() => {
-    (async () => {
-      const { data } = await Axios.get('/rooms.json');
-      setRooms(data);
-    })();
-  });
-
+export default function Rooms({ rooms = [] }) {
   return (
     <>
       <Header />
@@ -30,13 +21,10 @@ export default function Rooms() {
               <a>
                 <ConversationCard
                   title={obj.title}
-                  guests={['Гора', 'Негр']}
-                  avatars={[
-                    'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1476&q=80',
-                    'https://images.unsplash.com/photo-1626820247794-d4facae27c4a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=627&q=80',
-                  ]}
-                  guestsCount={2}
-                  speakersCount={2}
+                  guests={obj.guests}
+                  avatars={obj.avatars}
+                  guestsCount={obj.guestsCount}
+                  speakersCount={obj.speakersCount}
                 />
               </a>
             </Link>;
@@ -46,3 +34,22 @@ export default function Rooms() {
     </>
   );
 }
+export const getServerSideProps = async () => {
+  try {
+    const { data } = await Axios.get('/rooms.json');
+    console.log(data);
+
+    return {
+      props: {
+        rooms: data,
+      },
+    };
+  } catch (error) {
+    console.log('ERROR!');
+    return {
+      props: {
+        rooms: [],
+      },
+    };
+  }
+};
