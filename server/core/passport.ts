@@ -1,14 +1,22 @@
 import passport from 'passport';
-import { Strategy as TwitterStrategy } from 'passport-twitter';
-// TODO: Add Google auth
+import { Strategy as GithubStrategy } from 'passport-github';
+// TODO: Add Google and VK auth
 
 passport.use(
-  new TwitterStrategy(
+  'github',
+  new GithubStrategy(
     {
-      consumerKey: process.env.TWITTER_CONSUMER_KEY,
-      consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-      callbackURL: 'http://localhost:3001/auth/twitter/callback',
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: 'http://localhost:3001/auth/github/callback',
     },
-    (token, tokenSecret, profile, cb) => {},
+    (accessToken, refreshToken, profile, cb) => {
+      const user = {
+        fullname: profile.name,
+        avatarUrl: profile.photos?.[0].value,
+      };
+    },
   ),
 );
+
+export { passport };

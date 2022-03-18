@@ -1,11 +1,24 @@
 import express from 'express';
-import passport from 'passport';
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path: 'server/.env',
+});
+
+import './core/db';
+import { passport } from './core/passport';
 
 const app = express();
 
-app.post('/auth/twitter', passport.authenticate('twitter'), function (req, res) {
-  res.redirect('/users/' + req.user.username);
-});
-app.listen(3001, (err) => {
-  console.log('Все ок, кайфарик');
+app.get('/auth/github', passport.authenticate('github'));
+app.get(
+  '/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  (req, res) => {
+    res.send();
+  },
+);
+
+app.listen(3001, () => {
+  console.log('All is ok. server is stable');
 });
