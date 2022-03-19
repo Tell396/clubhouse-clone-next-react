@@ -24,3 +24,5 @@ module.exports = {
     dialect: 'postgres',
   },
 }
+
+// yarn sequelize - cli model: generate--name User--attributes fullname: string, avatarUrl: string, isActive: string, username: string, phone: string

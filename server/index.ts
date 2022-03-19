@@ -13,7 +13,7 @@ const app = express();
 app.get('/auth/github', passport.authenticate('github'));
 app.get(
   '/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login' }),
+  passport.authenticate('github', { failureRedirect: '/' }),
   (req, res) => {
     res.send();
   },

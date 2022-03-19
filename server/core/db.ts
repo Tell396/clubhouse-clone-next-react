@@ -17,3 +17,5 @@ async () => {
 };
 
 export { sequelize };
+
+// npx sequelize-cli db:migrate / yarn sequelize-cli db:migrate
