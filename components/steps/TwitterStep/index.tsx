@@ -14,7 +14,7 @@ export const TwitterStep: React.FC = () => {
     const win = window.open(
       "http://localhost:3001/auth/github",
       "Auth",
-      "width=500,height=500,status=yes,toolbar=no,menubar=no,location=no"
+      "width=500, height=500, status=yes, toolbar=no, menubar=no, location=no"
     );
 
     const timer = setInterval(() => {
