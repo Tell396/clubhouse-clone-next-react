@@ -1,7 +1,12 @@
 import passport from 'passport';
 import { Strategy as GithubStrategy } from 'passport-github';
+import dotenv from 'dotenv';
 // TODO: Add Google and VK auth
 const { User } = require('../../models');
+
+dotenv.config({
+  path: 'server/.env',
+});
 
 passport.use(
   'github',
