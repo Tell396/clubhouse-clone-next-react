@@ -1,13 +1,12 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import { passport } from './core/passport';
-
 import './core/db';
 
 dotenv.config({
   path: 'server/.env',
 });
 
+import { passport } from './core/passport';
 
 const app = express();
 

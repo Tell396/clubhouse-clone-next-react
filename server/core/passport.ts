@@ -1,8 +1,9 @@
 import passport from 'passport';
 import { Strategy as GithubStrategy } from 'passport-github';
 import dotenv from 'dotenv';
-// TODO: Add Google and VK auth
 const { User } = require('../../models');
+
+// TODO: Add Google and VK auth
 
 dotenv.config({
   path: 'server/.env',
@@ -18,6 +19,8 @@ passport.use(
     },
     async (_: unknown, __: unknown, profile, done) => {
       try {
+        console.log(profile, done)
+
         const obj = {
           fullname: profile.displayName,
           avatarUrl: profile.photos?.[0].value,
