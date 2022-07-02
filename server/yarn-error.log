@@ -1,0 +1,40 @@
+Arguments: 
+  /usr/bin/node /usr/bin/yarn install
+
+PATH: 
+  /home/beethoven/go/bin:node_modules/.bin:/home/beethoven/.local/bin:/home/beethoven/bin:bin:/home/beethoven/.cargo/bin:/home/beethoven/.local/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/home/beethoven/.dotnet/tools:/var/lib/flatpak/exports/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.3.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /home/beethoven/Templates/NextJS/clubhouse-clone-next-react/server/package.json: Unexpected token } in JSON at position 206
+      at JSON.parse (<anonymous>)
+      at /usr/lib/node_modules/yarn/lib/cli.js:1629:59
+      at Generator.next (<anonymous>)
+      at step (/usr/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /usr/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "clubhouse-server",
+    "version": "1.0.0",
+    "main": "index.ts",
+    "private": true,
+    "license": "MIT",
+    "scripts": {
+      "server": "ts-node-dev --respawn --transpile-only server/index.ts"
+    },
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
