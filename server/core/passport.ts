@@ -19,8 +19,6 @@ passport.use(
     },
     async (_: unknown, __: unknown, profile, done) => {
       try {
-        console.log(profile, done)
-
         const obj = {
           fullname: profile.displayName,
           avatarUrl: profile.photos?.[0].value,
