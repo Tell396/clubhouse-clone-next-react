@@ -13,28 +13,27 @@ export const TwitterStep: React.FC = () => {
 
   const onClickAuth = () => {
     const win = window.open(
-      'http://localhost:3001/auth/github',  
+      'http://localhost:3001/auth/github',
       'Auth',
       'width=500, height=500, status=yes, toolbar=no, menubar=no, location=no',
     );
-
-    const timer = setInterval(() => {
-      if (win.closed) {
-        clearInterval(timer);
-        onNextStep();
-      }
-    }, 100);
   };
 
+  // FIXME: govnocode
   React.useEffect(() => {
-    window.addEventListener('message', (data) => {
-      console.log(data);
+    window.addEventListener('message', ({ data, origin }) => {
+      const user: string = data;
+      if (typeof user === 'string' && data.includes('avatarUrl')) {
+        // Проверяем, строка-ли user: если да -- проверяет, включают-ли данные в себя avatarUrl
+        console.log(JSON.parse(user));
+        onNextStep();
+      }
     });
-  }, []);
+  });
 
   return (
     <div className={styles.block}>
-      <StepInfo icon="/static/connect.png" title="Do you want import info from Twitter?" />
+      <StepInfo icon="/static/connect.png" title="Do you want import info from Github?" />
       <WhiteBlock className={clsx('m-auto mt-40', styles.whiteBlock)}>
         <div className={styles.avatar}>
           <b>ID</b>
