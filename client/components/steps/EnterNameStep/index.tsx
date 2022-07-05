@@ -8,16 +8,17 @@ import React from 'react';
 import { MainContext } from '../../../pages';
 
 export const EnterNameStep = () => {
-  const [inputValue, setInputValue] = React.useState<string>('');
-  const { onNextStep } = React.useContext(MainContext);
+  const { onNextStep, userData, setFieldValue } = React.useContext(MainContext);
+  const [inputValue, setInputValue] = React.useState<string>(userData.fullname);
 
   const nextDisabled = !inputValue;
-
+  
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
   const onClickNextStep = () => {
+    setFieldValue('fullname', inputValue)
     onNextStep();
   };
 
@@ -26,7 +27,7 @@ export const EnterNameStep = () => {
       <StepInfo
         icon="/static/man.png"
         title="What’s your full name?"
-        description="People use real names on Clubhouse :) Thnx!"
+        description="People use real names on Clubhouse :) Thanks!"
       />
       <WhiteBlock className={clsx('m-auto', styles.whiteBlock)}>
         <div className="mb-30">

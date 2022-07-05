@@ -9,7 +9,7 @@ import { StepInfo } from '../../StepInfo';
 import styles from './TwitterStep.module.scss';
 
 export const TwitterStep: React.FC = () => {
-  const { onNextStep } = React.useContext(MainContext);
+  const { onNextStep, setUserData } = React.useContext(MainContext);
 
   const onClickAuth = () => {
     const win = window.open(
@@ -25,7 +25,7 @@ export const TwitterStep: React.FC = () => {
       const user: string = data;
       if (typeof user === 'string' && data.includes('avatarUrl')) {
         // Проверяем, строка-ли user: если да -- проверяет, включают-ли данные в себя avatarUrl
-        console.log(JSON.parse(user));
+        setUserData(JSON.parse(user));
         onNextStep();
       }
     });
