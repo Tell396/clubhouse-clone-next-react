@@ -1,5 +1,8 @@
 import express from 'express';
 import session from 'express-session';
+import multer from 'multer'
+import cors from 'cors'
+
 import './core/db';
 import dotenv from 'dotenv';
 
@@ -11,12 +14,17 @@ import { passport } from './core/passport';
 
 const app = express();
 
+app.use(cors())
 app.use(passport.initialize());
 app.use(session({
   secret: 'asd asd asda sda sdas d',
   resave: true,
   saveUninitialized: true
 }));
+
+app.get('/upload', multer({dest: '../public/avatars'}).single('photo'), (req, res) => {
+  res.json(req.file)
+});
 
 // Make register with github (Passport)
 app.get('/auth/github', passport.authenticate('github'));
