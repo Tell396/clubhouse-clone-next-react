@@ -6,13 +6,13 @@ import cors from 'cors'
 import './core/db';
 import dotenv from 'dotenv';
 
+const app = express();
+
 dotenv.config({
   path: 'server/.env',
 });
 
 import { passport } from './core/passport';
-
-const app = express();
 
 app.use(cors())
 app.use(passport.initialize());

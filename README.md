@@ -1,4 +1,4 @@
-<h1 align="center">Clubhouse</h1>
+<h1 align="center">🚀Clubhouse💥</h1>
 
 ## Getting Started
 
@@ -23,5 +23,5 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 - [x] Bugfix on database
 - [ ] Rewrite all twitter part of code to github
 - [ ] Add other (VK, Google) auth strategy
-- [ ] Rewrite all components from JS to TS
+- [x] Rewrite all components from JS to TS
 - [ ] Move `https://localhost:3001` on server files to `.env`
