@@ -14,10 +14,12 @@ import instance from '../../../core/axios';
 const uploadFile = async (file: File) => {
   const formData = new FormData();
   formData.append('photo', file);
-  const { data } = await instance.post('/upload', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
+
+  const { data } = await instance({
+    method: 'POST',
+    url: '/upload',
+    data: formData,
+    headers: {'Content-Type': 'multipart/form-data'}
   });
 
   return data

@@ -2,17 +2,24 @@ import express from 'express';
 import session from 'express-session';
 import multer from 'multer'
 import cors from 'cors'
-
-import './core/db';
 import dotenv from 'dotenv';
-
-const app = express();
+import { passport } from './core/passport';
+import './core/db';
 
 dotenv.config({
   path: 'server/.env',
 });
 
-import { passport } from './core/passport';
+const app = express();
+const uploader = multer.diskStorage({
+  destination: function(_req, _file, cb) {
+    cb(null, '../client/public/avatars')
+  },
+
+  filename: function(_req, file, cb) {
+   cb(null, file.fieldname + '-' Date.now() + '-' + Math.round(Math.random() * 1e9)
+  }
+})
 
 app.use(cors())
 app.use(passport.initialize());
@@ -22,7 +29,7 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.get('/upload', multer({dest: '../public/avatars'}).single('photo'), (req, res) => {
+app.post('/upload', uploader.single('photo'), (req, res) => {
   res.json(req.file)
 });
 
