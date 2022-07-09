@@ -64,7 +64,7 @@ app.post('/upload', uploader.single('photo'), (req, res) => {
       } else {
         fs.unlinkSync(filePath)
         res.json({
-          url: `../client/public/avatar/${req.file.filename}`
+          url: `/avatars/${req.file.filename.replace('.png', '.jpg')}`
         })
       }
     })
