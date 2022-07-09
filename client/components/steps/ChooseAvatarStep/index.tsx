@@ -26,7 +26,7 @@ const uploadFile = async (file: File): Promise<{ url: string }> => {
 };
 
 export const ChooseAvatarStep: React.FC = () => {
-  const { onNextStep, userData } = React.useContext(MainContext);
+  const { onNextStep, userData, setFieldValue } = React.useContext(MainContext);
 
   const [avatarUrl, setAvatarUrl] = React.useState<string>(userData.avatarUrl);
   const inputFileRef = React.useRef<HTMLInputElement>(null);
@@ -37,10 +37,11 @@ export const ChooseAvatarStep: React.FC = () => {
 
     if (file) {
       const imageUrl = URL.createObjectURL(file);
-      setAvatarUrl(imageUrl);
       const data = await uploadFile(file)
       target.value = ''
+      setAvatarUrl(imageUrl);
       setAvatarUrl(data.url)
+      setFieldValue('avatarUrl', data.url)
     }
   };
 
@@ -54,7 +55,7 @@ export const ChooseAvatarStep: React.FC = () => {
     <div className={styles.block}>
       <StepInfo
         icon="/static/celebration.png"
-        title="Okay, Archakov Dennis!"
+        title={`Okay, ${userData.fullname}!`}
         description="How’s this photo?"
       />
       <WhiteBlock className={clsx('m-auto mt-40', styles.whiteBlock)}>

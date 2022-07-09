@@ -21,9 +21,9 @@ export const MainContext = React.createContext<MainContextProps>({} as MainConte
 type MainContextProps = {
   step: number;
   onNextStep: () => void;
-  userData: User;
   setUserData: React.Dispatch<React.SetStateAction<User>>;
   setFieldValue: (field: keyof User, value: string) => void
+   userData?: User;
 };
 
 type User = {
@@ -38,7 +38,7 @@ type User = {
 
 export default function Home() {
   const [step, setStep] = React.useState<number>(0);
-  const [userData, setUserData] = React.useState<User>();
+  const [userData, setUserData] = React.useState<User | undefined>();
   const Step = stepsComponents[step];
   
   console.log(userData)
@@ -47,7 +47,7 @@ export default function Home() {
     setStep((prev) => prev + 1);
   };
 
-  const setFieldValue = (field, value: string) => {
+  const setFieldValue = (field: string, value: string) => {
     setUserData(prev => ({
       ...prev,
       [field]: value

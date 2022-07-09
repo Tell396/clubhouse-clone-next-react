@@ -16,6 +16,7 @@ import fs from 'fs'
 
 // Authentication
 import { passport } from './core/passport';
+import { Code } from './models'
 
 // Conenct to databse
 import './core/db';
@@ -45,6 +46,7 @@ const uploader = multer({
 
 app.use(cors())
 app.use(passport.initialize());
+app.use(express.json())
 app.use(session({
   secret: 'asd asd asda sda sdas d',
   resave: true,
@@ -56,7 +58,7 @@ app.post('/upload', uploader.single('photo'), (req, res) => {
   sharp(filePath)
     .resize(150, 150)
     .toFormat('jpg')
-    
+
     // BUG: Error: Cannot use same file for input and output
     .toFile(filePath.replace('.png', '.jpg'), (err) => {
       if (err) {
@@ -70,6 +72,19 @@ app.post('/upload', uploader.single('photo'), (req, res) => {
     })
   sharp.cache(false);
 });
+
+app.post('/auth/phone', (req, res) => {
+  const phone = req.body.phone
+  const user_id = req.user.id
+
+
+  // ((max, min) => Math.floor(Math.random() * (max - min + 1) + min))(1000,9999)
+  if (phone) {
+    const code = Code.create({
+      
+    })
+  }
+})
 
 // Make register with github (Passport)
 app.get('/auth/github', passport.authenticate('github'));
