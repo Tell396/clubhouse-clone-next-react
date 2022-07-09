@@ -4,6 +4,7 @@ import multer from 'multer'
 import cors from 'cors'
 import dotenv from 'dotenv';
 import { passport } from './core/passport';
+import * as crypto from 'crypto'
 import './core/db';
 
 dotenv.config({
@@ -11,14 +12,22 @@ dotenv.config({
 });
 
 const app = express();
-const uploader = multer.diskStorage({
-  destination: function(_req, _file, cb) {
-    cb(null, '../client/public/avatars')
-  },
+const uploader = multer({
+  storage: multer.diskStorage({
+    destination: function(_req, _file, cb) {
+      cb(null, '../client/public/avatars')
+    },
 
-  filename: function(_req, file, cb) {
-   cb(null, file.fieldname + '-' Date.now() + '-' + Math.round(Math.random() * 1e9)
-  }
+    filename: function(req, file, cb) {
+      const ext = file.originalname.split('.').pop()
+      const hash = crypto
+        .createHash('md5')
+        .update(file.fieldname + Date.now())
+        .digest('hex')
+
+      cb(null, `${hash}.${ext}`)
+    }
+  })
 })
 
 app.use(cors())
