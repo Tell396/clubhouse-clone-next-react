@@ -1,10 +1,23 @@
+// Main for server logic
 import express from 'express';
 import session from 'express-session';
-import multer from 'multer'
-import cors from 'cors'
 import dotenv from 'dotenv';
-import { passport } from './core/passport';
+
+// For feedback with client
+import cors from 'cors'
+
+// For image input
+import multer from 'multer'
 import * as crypto from 'crypto'
+import sharp from 'sharp'
+
+// For interaction with file system
+import fs from 'fs'
+
+// Authentication
+import { passport } from './core/passport';
+
+// Conenct to databse
 import './core/db';
 
 dotenv.config({
@@ -39,7 +52,23 @@ app.use(session({
 }));
 
 app.post('/upload', uploader.single('photo'), (req, res) => {
-  res.json(req.file)
+  const filePath = req.file.path
+  sharp(filePath)
+    .resize(150, 150)
+    .toFormat('jpg')
+    
+    // BUG: Error: Cannot use same file for input and output
+    .toFile(filePath.replace('.png', '.jpg'), (err) => {
+      if (err) {
+        throw err
+      } else {
+        fs.unlinkSync(filePath)
+        res.json({
+          url: `../client/public/avatar/${req.file.filename}`
+        })
+      }
+    })
+  sharp.cache(false);
 });
 
 // Make register with github (Passport)

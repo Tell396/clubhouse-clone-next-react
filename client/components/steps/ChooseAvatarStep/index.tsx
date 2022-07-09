@@ -11,7 +11,7 @@ import { MainContext } from '../../../pages';
 // Import Axios configure
 import instance from '../../../core/axios';
 
-const uploadFile = async (file: File) => {
+const uploadFile = async (file: File): Promise<{ url: string }> => {
   const formData = new FormData();
   formData.append('photo', file);
 
@@ -19,7 +19,7 @@ const uploadFile = async (file: File) => {
     method: 'POST',
     url: '/upload',
     data: formData,
-    headers: {'Content-Type': 'multipart/form-data'}
+    headers: { 'Content-Type': 'multipart/form-data' }
   });
 
   return data
@@ -32,12 +32,15 @@ export const ChooseAvatarStep: React.FC = () => {
   const inputFileRef = React.useRef<HTMLInputElement>(null);
 
   const handleChangeImage = async (event: Event) => {
-    const file = (event.target as HTMLInputElement).files[0];
+    const target = event.target as HTMLInputElement;
+    const file = target.files[0]
+
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setAvatarUrl(imageUrl);
       const data = await uploadFile(file)
-      console.log(data)
+      target.value = ''
+      setAvatarUrl(data.url)
     }
   };
 
