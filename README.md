@@ -1,4 +1,10 @@
-<h1 align="center">🚀Clubhouse💥</h1>
+<h1 align="center">🚀Euphoria💥</h1>
+
+<div align="center">
+  <b>
+    <i>Clubhouse clone</i>
+  </b>
+</div>
 
 ## Getting Started
 
