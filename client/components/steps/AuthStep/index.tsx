@@ -8,7 +8,7 @@ import { StepInfo } from '../../StepInfo';
 
 import styles from './TwitterStep.module.scss';
 
-export const TwitterStep: React.FC = () => {
+export const AuthStep: React.FC = () => {
   const { onNextStep, setUserData } = React.useContext(MainContext);
 
   const onClickAuth = () => {
@@ -50,7 +50,7 @@ export const TwitterStep: React.FC = () => {
             />
           </svg>
         </div>
-        <h2 className="mb-40">Ivan Dubautsou</h2>
+        <h2 className="mb-40">Ivan Ivanov</h2>
         <Button onClick={onClickAuth}>
           <img src="/static/twitter.svg" alt="Twitter logo" className={styles.twitterLogo} />
           Import from GitHub

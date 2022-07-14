@@ -2,14 +2,14 @@ import React from 'react';
 
 import { WelcomeStep } from '../components/steps/WelcomeStep';
 import { EnterNameStep } from '../components/steps/EnterNameStep';
-import { TwitterStep } from '../components/steps/TwitterStep';
+import { AuthStep } from '../components/steps/AuthStep';
 import { ChooseAvatarStep } from '../components/steps/ChooseAvatarStep';
 import { EnterPhoneStep } from '../components/steps/EnterPhoneStep';
 import { EnterCodeStep } from '../components/steps/EnterCodeStep';
 
 const stepsComponents = {
   0: WelcomeStep,
-  1: TwitterStep,
+  1: AuthStep,
   2: EnterNameStep,
   3: ChooseAvatarStep,
   4: EnterPhoneStep,

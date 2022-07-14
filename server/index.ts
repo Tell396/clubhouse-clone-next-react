@@ -26,6 +26,9 @@ dotenv.config({
 });
 
 const app = express();
+// Here we generate phone code with 4 symbols
+const generatePhoneCode = (max: number = 9999, min: number = 9999) => Math.floor(Math.random() * (max - min + 1) + min)
+// Upload photography with this settings
 const uploader = multer({
   storage: multer.diskStorage({
     destination: function(_req, _file, cb) {
@@ -48,7 +51,7 @@ app.use(cors())
 app.use(passport.initialize());
 app.use(express.json())
 app.use(session({
-  secret: 'asd asd asda sda sdas d',
+  secret: 'some very secret key',
   resave: true,
   saveUninitialized: true
 }));
@@ -70,6 +73,7 @@ app.post('/upload', uploader.single('photo'), (req, res) => {
         })
       }
     })
+  // Clean cache. DO NOT delete this line!
   sharp.cache(false);
 });
 
@@ -77,11 +81,10 @@ app.post('/auth/phone', (req, res) => {
   const phone = req.body.phone
   const user_id = req.user.id
 
-
-  // ((max, min) => Math.floor(Math.random() * (max - min + 1) + min))(1000,9999)
   if (phone) {
     const code = Code.create({
-      
+      code: generatePhoneCode(),
+      user_id: user_id
     })
   }
 })
