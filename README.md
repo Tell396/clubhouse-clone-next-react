@@ -31,3 +31,4 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 - [ ] Add other (VK, Google) auth strategy
 - [x] Rewrite all components from JS to TS
 - [ ] Move `https://localhost:3001` on server files to `.env`
+- [ ] Create auth with SMS

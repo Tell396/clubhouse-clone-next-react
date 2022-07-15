@@ -17,6 +17,15 @@ import fs from 'fs'
 // Authentication
 import { passport } from './core/passport';
 import { Code } from './models'
+import { UserData } from '../client/pages/index'
+
+import Axios from '../client/core/axios'
+
+declare global {
+  namespace Express {
+    interface User extends UserData { }
+  }
+}
 
 // Conenct to databse
 import './core/db';
@@ -77,16 +86,20 @@ app.post('/upload', uploader.single('photo'), (req, res) => {
   sharp.cache(false);
 });
 
-app.post('/auth/phone', (req, res) => {
+app.post('/auth/phone', async (req, res) => {
   const phone = req.body.phone
-  const user_id = req.user.id
+  const userId = req.user.id
 
-  if (phone) {
-    const code = Code.create({
-      code: generatePhoneCode(),
-      user_id: user_id
-    })
+  if (!phone) {
+    return res.status(400).send()
   }
+
+  const data = await Axios.get('https://sms.ru/sms/send?api_id=E8537D70-E35D-EF89-5D83-56154CD972A3&to=79662932696&msg=hello+world&json=1')
+
+  await const code = Code.create({
+    code: generatePhoneCode(),
+    user_id: userId
+  })
 })
 
 // Make register with github (Passport)

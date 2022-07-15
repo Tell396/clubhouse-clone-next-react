@@ -19,4 +19,4 @@ const sequelize = new Sequelize('clubhouse', 'postgres', 'postgres', {
 export { sequelize };
 
 // npx sequelize-cli db:migrate / yarn sequelize-cli db:migrate
-// yarn sequelize - cli model: generate--name User--attributes fullname: string, avatarUrl: string, isActive: string, username: string, phone: string
+// yarn sequelize-cli model:generate --name User --attributes fullname:string,avatarUrl:string,isActive:string,username:string,phone:string

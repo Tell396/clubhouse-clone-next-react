@@ -9,13 +9,13 @@ import styles from './ChooseAvatarStep.module.scss';
 import { MainContext } from '../../../pages';
 
 // Import Axios configure
-import instance from '../../../core/axios';
+import Axios from '../../../core/axios';
 
 const uploadFile = async (file: File): Promise<{ url: string }> => {
   const formData = new FormData();
   formData.append('photo', file);
 
-  const { data } = await instance({
+  const { data } = await Axios({
     method: 'POST',
     url: '/upload',
     data: formData,
