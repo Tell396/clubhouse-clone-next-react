@@ -16,7 +16,7 @@ import fs from 'fs'
 
 // Authentication
 import { passport } from './core/passport';
-import { Code } from './models'
+import { Code } from './models/code'
 import { UserData } from '../client/pages/index'
 
 import Axios from '../client/core/axios'
@@ -33,6 +33,8 @@ import './core/db';
 dotenv.config({
   path: 'server/.env',
 });
+
+console.log(process.env.PHONE_API)
 
 const app = express();
 // Here we generate phone code with 4 symbols
@@ -86,20 +88,28 @@ app.post('/upload', uploader.single('photo'), (req, res) => {
   sharp.cache(false);
 });
 
-app.post('/auth/phone', async (req, res) => {
-  const phone = req.body.phone
+app.get('/auth/sms', async (req, res) => {
+  const phone = req.query.phone
   const userId = req.user.id
+  const smsCode = generatePhoneCode()
 
   if (!phone) {
     return res.status(400).send()
   }
 
-  const data = await Axios.get('https://sms.ru/sms/send?api_id=E8537D70-E35D-EF89-5D83-56154CD972A3&to=79662932696&msg=hello+world&json=1')
+  try {
+    const data = await Axios.get(`https://sms.ru/sms/send?api_id=${process.env.SMS_API_KEY}&to=79662932696&msg=${smsCode}`)
 
-  await const code = Code.create({
-    code: generatePhoneCode(),
-    user_id: userId
-  })
+    await const code = Code.create({
+      code: smsCode,
+      user_id: userId
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: "Error"
+    })
+  }
+
 })
 
 // Make register with github (Passport)
