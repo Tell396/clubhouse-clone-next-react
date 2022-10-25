@@ -1,6 +1,7 @@
 client/node_modules
 server/node_modules
 
+README.html
 yarn.lock
 
 client/.next
