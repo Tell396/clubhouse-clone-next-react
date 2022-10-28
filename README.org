@@ -11,9 +11,9 @@
 For run the development server:
 
 #+begin_src bash
-npm run dev
-# or
-yarn dev
+	npm run dev
+	# or
+	yarn dev
 #+end_src
 
 Open [[http://localhost:3000][http://localhost:3000]] with your browser to see the result.
@@ -21,14 +21,13 @@ Open [[http://localhost:3000][http://localhost:3000]] with your browser to see t
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 [[https://nextjs.org/docs/api-routes/introduction][API Routes]] can be accessed on [[http://localhost:3000/api/hello][http://localhost:3000/api/hello]]. This endpoint can be edited in `pages/api/hello.js`.
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [[https://nextjs.org/docs/api-routes/introduction][API Routes]] instead of React pages.
-
-** TODO 
-*** DONE Bugfix on database
+ 
+**** TODO Add other (VK, Google) auth strategy
+**** TODO Move /https://localhost:3001/ on server files to `.env`
+**** TODO Create auth with SMS
+**** DONE Bugfix on database
 		CLOSED: [2022-04-25 Вт 19:06]
-*** DONE Rewrite all twitter part of code to github
+**** DONE Rewrite all twitter part of code to github
 		CLOSED: [2022-04-25 Вт 21:34]
-*** Add other (VK, Google) auth strategy
-*** DONE Rewrite all components from JS to TS
+**** DONE Rewrite all components from JS to TS
 	  CLOSED: [2022-03-25 Вт 12:38]
-*** Move /https://localhost:3001/ on server files to `.env`
-*** Create auth with SMS

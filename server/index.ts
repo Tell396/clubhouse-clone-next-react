@@ -37,6 +37,7 @@ dotenv.config({
 console.log(process.env.PHONE_API);
 
 const app = express();
+
 // Here we generate phone code with 4 symbols
 const generatePhoneCode = (max: number = 9999, min: number = 9999) =>
   Math.floor(Math.random() * (max - min + 1) + min);
