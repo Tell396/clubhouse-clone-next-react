@@ -34,8 +34,6 @@ dotenv.config({
   path: "server/.env",
 });
 
-console.log(process.env.PHONE_API);
-
 const app = express();
 
 // Here we generate phone code with 4 symbols

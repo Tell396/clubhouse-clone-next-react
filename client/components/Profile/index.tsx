@@ -1,9 +1,12 @@
-import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
+
+// Components
 import { Avatar } from '../Avatar';
 import { BackButton } from '../BackButton';
 import { Button } from '../Button';
+
+import clsx from 'clsx';
 
 import styles from './Profile.module.scss';
 

@@ -12,10 +12,10 @@ export const Header: React.FC = () => {
         <Link href="/rooms">
           <div className={clsx(styles.headerLogo, 'd-flex align-items-center cup')}>
             <img src="/static/hand-wave.png" alt="Logo" className="mr-5" />
-            <h4>Clubhouse</h4>
+            <h4>Euphoria</h4>
           </div>
         </Link>
-        <Link href="/profile/1">
+        <Link href="/profile/1123">
           <div className="d-flex align-items-center cup">
             <b className="mr-5">Zubenko Mihail</b>
             <Avatar
