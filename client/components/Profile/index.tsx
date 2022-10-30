@@ -12,7 +12,7 @@ import styles from './Profile.module.scss';
 
 interface ProfileProps {
   fullname: string;
-  username: string;
+  username: string | string[];
   avatarUrl: string;
   about: string;
 }
