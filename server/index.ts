@@ -115,7 +115,6 @@ app.post("/upload", uploader.single("photo"), (req, res) => {
 //   }
 // });
 
-// Make register with github (Passport)
 app.get("/auth/github", passport.authenticate("github"));
 app.get(
   "/auth/github/callback",
@@ -129,6 +128,27 @@ app.get(
     );
   }
 );
+
+app.get("/auth/google", passport.authenticate("google"));
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  (req, res) => {
+    res.send(
+      `<script>
+        window.opener.postMessage('${JSON.stringify(req.user)}', '*');
+        window.close();
+      </script>`
+    );
+  }
+);
+
+app.post('/logout', function(req, res, next){
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
+});
 
 app.listen(3001, () => {
   console.log("All is ok. server is stable");
