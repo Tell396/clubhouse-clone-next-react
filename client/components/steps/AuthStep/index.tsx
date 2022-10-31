@@ -53,7 +53,7 @@ export const AuthStep: React.FC = () => {
         <h2 className="mb-40">Ivan Ivanov</h2>
         <Button onClick={onClickAuth}>
           <img src="/static/twitter.svg" alt="Twitter logo" className={styles.twitterLogo} />
-          Import from GitHub
+          Import from Github
           <img className="d-ib ml-10" src="/static/arrow.svg" />
         </Button>
         <div className="link mt-20 cup d-ib">Enter my info manually</div>

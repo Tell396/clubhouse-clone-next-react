@@ -7,7 +7,7 @@
 #+OPTIONS: num:nil ^:{}
 
 ** Server:
-**** TODO Add other (VK, Google) auth strategy
+**** DOING Add other (VK, Google) auth strategy
 **** TODO Move /https://localhost:3001/ on server files to `.env`
 **** TODO Add auth with SMS step
 **** TODO Photo uploading bugfix (server)
@@ -21,3 +21,16 @@
 ** Client:
 **** TODO Add responsive for mobile and tablet
 **** TODO Photo uploading bugfix (client)
+**** TODO Refactoring a part of code
+		#+begin_src typescript
+		React.useEffect(() => {
+				window.addEventListener('message', ({ data, origin }) => {
+						const user: string = data;
+						if (typeof user === 'string' && data.includes('avatarUrl')) {
+								// Проверяем, строка-ли user: если да -- проверяет, включают-ли данные в себя avatarUrl
+								setUserData(JSON.parse(user));
+								onNextStep();
+						}
+				});
+		});
+		#+end_src

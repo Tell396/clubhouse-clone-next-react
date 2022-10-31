@@ -129,10 +129,10 @@ app.get(
   }
 );
 
-app.get("/auth/google", passport.authenticate("google"));
+app.get("/auth/vk", passport.authenticate("vkontakte"));
 app.get(
-  "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }),
+  "/auth/vkontake/callback",
+  passport.authenticate("vkontakte", { failureRedirect: "/login" }),
   (req, res) => {
     res.send(
       `<script>

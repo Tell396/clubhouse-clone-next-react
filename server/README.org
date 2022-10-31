@@ -15,13 +15,13 @@
 #+end_src
 
 * User model
-| id | Fullname           | avatarUrl            | isActive | username |      phone |
-|----+--------------------+----------------------+----------+----------+------------|
-|  0 | Berezhnev Vladimir | https://example.com/ | true     | Tell396  | +123456789 |
-|    |                    |                      |          |          |            |
+| id | Fullname           | avatarUrl                   | isActive | username |      phone |
+|----+--------------------+-----------------------------+----------+----------+------------|
+|  0 | Berezhnev Vladimir | https://example.com/123.jpg | true     | Tell396  | +123456789 |
+|  1 | Ivan Ivanov        | https://example.com/321.jpg | false    | Dship634 | +987654321 |
 
 * (Phone) code model
 | id | code | user_id |
 |----+------+---------|
-|    |      |         |
+|  0 | 1223 |       0 |
 |    |      |         |
