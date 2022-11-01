@@ -6,12 +6,14 @@ import { WhiteBlock } from '../../WhiteBlock';
 import { Button } from '../../Button';
 import { StepInfo } from '../../StepInfo';
 
-import styles from './TwitterStep.module.scss';
+import { SiVk, SiGithub, SiTwitter } from "react-icons/si"
 
-export const AuthStep: React.FC = () => {
+import styles from './SocialAuthStep.module.scss';
+
+export const SocialAuthStep: React.FC = () => {
   const { onNextStep, setUserData } = React.useContext(MainContext);
 
-  const onClickAuth = () => {
+  const onClickAuthGithub = () => {
     const win = window.open(
       'http://localhost:3001/auth/github',
       'Auth',
@@ -19,6 +21,14 @@ export const AuthStep: React.FC = () => {
     );
   };
 
+  const onClickAuthVK = () => {
+    const win = window.open(
+      'http://localhost:3001/auth/vk',
+      'Auth',
+      'width=500, height=500, status=yes, toolbar=no, menubar=no, location=no',
+    );
+  };
+		
   // FIXME: govnocode
   React.useEffect(() => {
     window.addEventListener('message', ({ data, origin }) => {
@@ -50,12 +60,21 @@ export const AuthStep: React.FC = () => {
             />
           </svg>
         </div>
-        <h2 className="mb-40">Ivan Ivanov</h2>
-        <Button onClick={onClickAuth}>
-          <img src="/static/twitter.svg" alt="Twitter logo" className={styles.twitterLogo} />
-          Import from Github
+        <h2 className="mb-40">John Doe</h2>
+					<Button onClick={onClickAuthGithub} color="github">
+					<SiGithub />{' '}
+					Import from Github
           <img className="d-ib ml-10" src="/static/arrow.svg" />
         </Button>
+
+				<div className="flex">
+				<Button onClick={onClickAuthVK} color="twitter">
+          <SiTwitter />
+      </Button>
+				<Button onClick={onClickAuthVK} color="vkontakte">
+          <SiVk />
+				</Button>
+				</div>
         <div className="link mt-20 cup d-ib">Enter my info manually</div>
       </WhiteBlock>
     </div>

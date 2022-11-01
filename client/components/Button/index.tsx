@@ -1,10 +1,13 @@
-import clsx from 'clsx';
 import React from 'react';
+import clsx from 'clsx';
 
 import styles from './Button.module.scss';
 
 const colors = {
-  green: styles.buttonGreen,
+	github: styles.buttonGithub,
+twitter: styles.buttonTwitter,
+vkontakte: styles.buttonVK,
+	green: styles.buttonGreen,
   gray: styles.buttonGray,
   blue: styles.buttonBlue,
 };

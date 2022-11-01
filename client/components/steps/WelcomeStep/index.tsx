@@ -16,10 +16,10 @@ export const WelcomeStep: React.FC = () => {
           src="/static/hand-wave.png"
           alt="Celebration"
         />
-        Welcome to Clubhouse!
+        Welcome to Euphoria!
       </h3>
       <p>
-        We’re working hard to get Clubhouse ready for everyone! While we wrap up
+        We’re working hard to get Euphoria ready for everyone! While we wrap up
         the finishing youches, we’re adding people gradually to make sure
         nothing breaks :)
       </p>

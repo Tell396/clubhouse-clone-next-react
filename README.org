@@ -1,36 +1,35 @@
 #+TITLE: 🚀Euphoria💥
 #+AUTHOR: Berezhnev Vladimir (Tell396)
-#+DESCRIPTION: Berezhnev's personal Emacs config.
 #+STARTUP: showeverything
 #+EXPORT_FILE_NAME: ~/Org/html/config.html
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 #+OPTIONS: num:nil ^:{}
 
-** Server:
-**** DOING Add other (VK, Google) auth strategy
-**** TODO Move /https://localhost:3001/ on server files to `.env`
-**** TODO Add auth with SMS step
-**** TODO Photo uploading bugfix (server)
-**** DONE Bugfix on database
-		CLOSED: [2022-04-25 Вт 19:06]
-**** DONE Rewrite all twitter part of code to github
-		CLOSED: [2022-04-25 Вт 21:34]
-**** DONE Rewrite all components from JS to TS
-	  CLOSED: [2022-03-25 Вт 12:38]
-
-** Client:
-**** TODO Add responsive for mobile and tablet
-**** TODO Photo uploading bugfix (client)
-**** TODO Refactoring a part of code
-		#+begin_src typescript
-		React.useEffect(() => {
-				window.addEventListener('message', ({ data, origin }) => {
-						const user: string = data;
-						if (typeof user === 'string' && data.includes('avatarUrl')) {
-								// Проверяем, строка-ли user: если да -- проверяет, включают-ли данные в себя avatarUrl
-								setUserData(JSON.parse(user));
-								onNextStep();
-						}
-				});
+* Server [3/7]:
+** DOING Add other (VK, Google) auth strategy
+** TODO Move /https://localhost:3001/ on server files to `.env`
+** TODO Add auth with SMS step
+** TODO Photo uploading bugfix (server)
+** DONE Bugfix on database
+CLOSED: [2022-04-25 Вт 19:06]
+** DONE Rewrite all twitter part of code to github
+CLOSED: [2022-04-25 Вт 21:34]
+** DONE Rewrite all components from JS to TS
+CLOSED: [2022-03-25 Вт 12:38]
+		
+* Client [0/3]:
+** TODO Add responsive for mobile and tablet
+** TODO Photo uploading bugfix (client)
+** TODO Refactoring a part of code
+#+begin_src js
+	React.useEffect(() => {
+		window.addEventListener('message', ({ data, origin }) => {
+			const user: string = data;
+			if (typeof user === 'string' && data.includes('avatarUrl')) {
+				// Проверяем, строка-ли user: если да -- проверяет, включают-ли данные в себя avatarUrl
+				setUserData(JSON.parse(user));
+				onNextStep();
+			}
 		});
+	});
 		#+end_src
