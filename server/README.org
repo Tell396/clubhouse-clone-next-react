@@ -1,11 +1,10 @@
-
-** Database migration & model generation
+* Database migration & model generation
 #+begin_src bash
 	yarn sequelize-cli model:generate --name User --attributes fullname:string,avatarUrl:string,isActive:string,username:string,phone:string
 	yarn sequelize-cli model:generate --name Code --attributes code:integer,user_id:string
 #+end_src
 
-** Models generation
+* Models generation
 #+begin_src bash
 	npx sequelize-cli db:migrate
 
@@ -14,14 +13,17 @@
 	yarn sequelize-cli db:migrate
 #+end_src
 
-* User model
+** User model
 | id | Fullname           | avatarUrl                   | isActive | username |      phone |
 |----+--------------------+-----------------------------+----------+----------+------------|
 |  0 | Berezhnev Vladimir | https://example.com/123.jpg | true     | Tell396  | +123456789 |
-|  1 | Ivan Ivanov        | https://example.com/321.jpg | false    | Dship634 | +987654321 |
+|  1 | Ivan Ivanov        | https://example.com/321.jpg | false    | Chip634 | +987654321 |
 
-* (Phone) code model
+** (Phone) code model
 | id | code | user_id |
 |----+------+---------|
 |  0 | 1223 |       0 |
 |    |      |         |
+
+
+* Service, that I use for [[https://sms.ru][phone code registration]]

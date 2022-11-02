@@ -17,7 +17,7 @@ export const Header: React.FC = () => {
         </Link>
         <Link href="/profile/1123">
           <div className="d-flex align-items-center cup">
-            <b className="mr-5">Zubenko Mihail</b>
+            <b className="mr-5">John Doe</b>
             <Avatar
               src="https://i.pinimg.com/originals/b6/a2/bf/b6a2bfae90ff4c3fed3e1f1088070e04.jpg"
               width="50px"

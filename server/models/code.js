@@ -13,12 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Code.init({
+
+	Code.init({
     code: DataTypes.INTEGER,
     user_id: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Code',
   });
+
   return Code;
 };

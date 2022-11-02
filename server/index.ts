@@ -16,7 +16,7 @@ import fs from "fs";
 
 // Authentication
 import { passport } from "./core/passport";
-import { Code } from "./models/code";
+import Code from "./models/code";
 import { UserData } from "../client/pages/index";
 
 import Axios from "../client/core/axios";
@@ -35,6 +35,38 @@ dotenv.config({
 });
 
 const app = express();
+
+app.use(cors());
+app.use(passport.initialize());
+app.use(express.json());
+app.use(
+  session({
+    secret: "some very secret key",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+// app.post("/upload", uploader.single("photo"), (req, res) => {
+//   const filePath = req.file.path;
+//   sharp(filePath)
+//     .resize(150, 150)
+//     .toFormat("jpg")
+
+//     // BUG: Error: Cannot use same file for input and output
+//     .toFile(filePath.replace(".png", ".jpg"), (err) => {
+//       if (err) {
+//         throw err;
+//       } else {
+//         fs.unlinkSync(filePath);
+//         res.json({
+//           url: `/avatars/${req.file.filename.replace(".png", ".jpg")}`,
+//         });
+//       }
+//     });
+//   // Clean cache. DO NOT delete this line!
+//   sharp.cache(false);
+// });
 
 // Here we generate phone code with 4 symbols
 const generatePhoneCode = (max: number = 9999, min: number = 9999) =>
@@ -58,62 +90,32 @@ const uploader = multer({
   }),
 });
 
-app.use(cors());
-app.use(passport.initialize());
-app.use(express.json());
-app.use(
-  session({
-    secret: "some very secret key",
-    resave: true,
-    saveUninitialized: true,
-  })
-);
+app.get("/auth/sms", async (req, res) => {
+  const phone = req.query.phone;
+  // const userId = req.user.id;
+  const smsCode = generatePhoneCode();
 
-app.post("/upload", uploader.single("photo"), (req, res) => {
-  const filePath = req.file.path;
-  sharp(filePath)
-    .resize(150, 150)
-    .toFormat("jpg")
+  if (!phone) {
+    return res.status(400).send();
+  }
 
-    // BUG: Error: Cannot use same file for input and output
-    .toFile(filePath.replace(".png", ".jpg"), (err) => {
-      if (err) {
-        throw err;
-      } else {
-        fs.unlinkSync(filePath);
-        res.json({
-          url: `/avatars/${req.file.filename.replace(".png", ".jpg")}`,
-        });
-      }
+	console.log(req.query)
+
+  try {
+    const data = await Axios.get(
+				`https://sms.ru/sms/send?api_id=${process.env.SMS_API_KEY}&to=${process.env.PHONE}&msg=${smsCode}`
+    );
+
+    // const code = Code.create({
+    //   code: smsCode,
+    //   user_id: userId,
+    // });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error",
     });
-  // Clean cache. DO NOT delete this line!
-  sharp.cache(false);
+  }
 });
-
-// app.get("/auth/sms", async (req, res) => {
-//   const phone = req.query.phone;
-//   const userId = req.user.id;
-//   const smsCode = generatePhoneCode();
-
-//   if (!phone) {
-//     return res.status(400).send();
-//   }
-
-//   try {
-//     const data = await Axios.get(
-//       `https://sms.ru/sms/send?api_id=${process.env.SMS_API_KEY}&to=79662932696&msg=${smsCode}`
-//     );
-
-//     const code = Code.create({
-//       code: smsCode,
-//       user_id: userId,
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       message: "Error",
-//     });
-//   }
-// });
 
 app.get("/auth/github", passport.authenticate("github"));
 app.get(

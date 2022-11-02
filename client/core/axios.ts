@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 const Axios = axios.create({
-  baseURL: 'http://localhost:3001',
-  withCredentials: false
+  //baseURL: 'http://localhost:3001',
+  withCredentials: false,
 });
 
-export default Axios
+export default Axios;

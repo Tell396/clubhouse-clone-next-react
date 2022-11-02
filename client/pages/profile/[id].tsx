@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react';
+
 import { Header } from '../../components/Header';
 import { Profile } from '../../components/Profile';
 
@@ -9,7 +10,7 @@ export default function ProfilePage() {
 
   return (
     <>
-      <Header />
+			<Header /> 
       <div className="container mt-40">
         <Profile
           avatarUrl="https://i.pinimg.com/originals/b6/a2/bf/b6a2bfae90ff4c3fed3e1f1088070e04.jpg"

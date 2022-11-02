@@ -1,9 +1,11 @@
-import Link from 'next/link';
-import React from 'react';
-import { Button } from '../components/Button';
-import { ConversationCard } from '../components/ConversationCard';
-import { Header } from '../components/Header';
-import Axios from '../core/axios';
+import Link from "next/link";
+import React from "react";
+import { Button } from "../components/Button";
+import { ConversationCard } from "../components/ConversationCard";
+import { Header } from "../components/Header";
+import Axios from "../core/axios";
+
+import JSONdata from "../public/rooms.json";
 
 export default function RoomsPage({ rooms = [] }) {
   return (
@@ -36,14 +38,17 @@ export default function RoomsPage({ rooms = [] }) {
 
 export const getServerSideProps = async () => {
   try {
-    const { data } = await Axios.get('/rooms.json');
+    // const { data } = await Axios.get("/public/rooms.json");
+    const data = JSONdata;
+    console.log(data);
     return {
       props: {
         rooms: data,
       },
     };
   } catch (error) {
-    console.log('ERROR!');
+    console.log("ERROR!");
+    console.log(error);
     return {
       props: {
         rooms: [],
