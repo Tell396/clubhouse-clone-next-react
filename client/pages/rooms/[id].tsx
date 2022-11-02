@@ -5,6 +5,8 @@ import { Header } from "../../components/Header";
 import { Room } from "../../components/Room";
 import Axios from "../../core/axios";
 
+import data from "../../public/rooms.json";
+
 export default function ProfilePage({ room }) {
   const router = useRouter();
   const { id } = router.query;
@@ -23,7 +25,7 @@ export default function ProfilePage({ room }) {
 
 export const getServerSideProps = async (ctx) => {
   try {
-    const { data } = await Axios.get("/rooms.json");
+    //const { data } = await Axios.get("/rooms.json");
     const roomId = ctx.query.id;
     const room = data.find((obj) => obj.id === "6069d72643dbf66bb5af225a");
 
