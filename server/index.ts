@@ -92,18 +92,18 @@ const uploader = multer({
 
 app.get("/auth/sms", async (req, res) => {
   const phone = req.query.phone;
-  // const userId = req.user.id;
+  const userId = 1;
   const smsCode = generatePhoneCode();
 
   if (!phone) {
     return res.status(400).send();
   }
 
-	console.log(req.query)
+  console.log(req.query);
 
   try {
     const data = await Axios.get(
-				`https://sms.ru/sms/send?api_id=${process.env.SMS_API_KEY}&to=${process.env.PHONE}&msg=${smsCode}`
+      `https://sms.ru/sms/send?api_id=${process.env.SMS_API_KEY}&to=${process.env.PHONE}&msg=${smsCode}`
     );
 
     // const code = Code.create({
@@ -145,10 +145,12 @@ app.get(
   }
 );
 
-app.post('/logout', function(req, res, next){
-  req.logout(function(err) {
-    if (err) { return next(err); }
-    res.redirect('/');
+app.post("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
   });
 });
 

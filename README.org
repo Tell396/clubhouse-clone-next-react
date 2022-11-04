@@ -5,11 +5,13 @@
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 #+OPTIONS: num:nil ^:{}
 
-* Server [3/7]:
-** DOING Add other (VK, Google) auth strategy
-** TODO Move /https://localhost:3001/ on server files to `.env`
+* Server [5/7]:
 ** TODO Add auth with SMS step
 ** TODO Photo uploading bugfix (server)
+** DONE Add other (VK, Google) auth strategy
+CLOSED: [2022-11-04 Пт 16:57]
+** DONE Move /https://localhost:3001/ on server files to `.env`
+CLOSED: [2022-11-04 Пт 01:12]
 ** DONE Bugfix on database
 CLOSED: [2022-04-25 Вт 19:06]
 ** DONE Rewrite all twitter part of code to github
@@ -18,8 +20,6 @@ CLOSED: [2022-04-25 Вт 21:34]
 CLOSED: [2022-03-25 Вт 12:38]
 		
 * Client [1/3]:
-** DONE Add responsive for mobile and tablet
-CLOSED: [2022-11-02 Ср 17:19]
 ** TODO Photo uploading bugfix (client)
 ** TODO Refactoring a part of code: [[file:client/components/steps/SocialAuthStep/index.tsx]]
 #+begin_src js
@@ -34,3 +34,5 @@ CLOSED: [2022-11-02 Ср 17:19]
 		});
 	});
 #+end_src
+** DONE Add responsive for mobile and tablet
+CLOSED: [2022-11-02 Ср 17:19]
