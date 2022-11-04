@@ -9,6 +9,7 @@ const { User } = require("../models");
 dotenv.config();
 
 passport.use(
+  "github",
   new GithubStrategy(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
