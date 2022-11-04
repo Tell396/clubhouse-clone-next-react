@@ -36,41 +36,6 @@ dotenv.config({
 
 const app = express();
 
-app.use(cors());
-app.use(passport.initialize());
-app.use(express.json());
-app.use(
-  session({
-    secret: "some very secret key",
-    resave: true,
-    saveUninitialized: true,
-  })
-);
-
-// app.post("/upload", uploader.single("photo"), (req, res) => {
-//   const filePath = req.file.path;
-//   sharp(filePath)
-//     .resize(150, 150)
-//     .toFormat("jpg")
-
-//     // BUG: Error: Cannot use same file for input and output
-//     .toFile(filePath.replace(".png", ".jpg"), (err) => {
-//       if (err) {
-//         throw err;
-//       } else {
-//         fs.unlinkSync(filePath);
-//         res.json({
-//           url: `/avatars/${req.file.filename.replace(".png", ".jpg")}`,
-//         });
-//       }
-//     });
-//   // Clean cache. DO NOT delete this line!
-//   sharp.cache(false);
-// });
-
-// Here we generate phone code with 4 symbols
-const generatePhoneCode = (max: number = 9999, min: number = 9999) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
 // Upload photography with this settings
 const uploader = multer({
   storage: multer.diskStorage({
@@ -89,6 +54,42 @@ const uploader = multer({
     },
   }),
 });
+
+app.use(cors());
+app.use(passport.initialize());
+app.use(express.json());
+app.use(
+  session({
+    secret: "some very secret key",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+app.post("/upload", uploader.single("photo"), (req, res) => {
+  const filePath = req.file.path;
+  sharp(filePath)
+    .resize(150, 150)
+    .toFormat("jpg")
+
+    // FIXME: Error: Cannot use same file for input and output
+    .toFile(filePath.replace(".png", ".jpg"), (err) => {
+      if (err) {
+        throw err;
+      } else {
+        fs.unlinkSync(filePath);
+        res.json({
+          url: `/avatars/${req.file.filename.replace(".png", ".jpg")}`,
+        });
+      }
+    });
+  // Clean cache. DO NOT delete this line!
+  sharp.cache(false);
+});
+
+// Here we generate phone code with 4 symbols
+const generatePhoneCode = (max: number = 9999, min: number = 9999) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
 
 app.get("/auth/sms", async (req, res) => {
   const phone = req.query.phone;

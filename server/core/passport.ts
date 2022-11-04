@@ -9,7 +9,6 @@ const { User } = require("../models");
 dotenv.config();
 
 passport.use(
-  "github",
   new GithubStrategy(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
@@ -80,6 +79,7 @@ passport.use(
     }
   )
 );
+
 passport.serializeUser(function (user, done) {
   done(null, user);
 });
