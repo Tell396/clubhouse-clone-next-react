@@ -2,11 +2,22 @@ import passport from "passport";
 
 import { Strategy as GithubStrategy } from "passport-github";
 import { Strategy as VKStrategy } from "passport-vkontakte";
+import { ExtractJwt, Strategy as JWTStrategy } from "passport-jwt";
+
+import { createJWT } from "../utils/createJWT";
 
 import dotenv from "dotenv";
+import { UserData } from "../../client/pages";
 const { User } = require("../models");
 
 dotenv.config();
+
+const opts = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.JWT_SECRET,
+  issuer: "accounts.examplesoft.com",
+  audience: "yoursite.net",
+};
 
 passport.use(
   "github",
@@ -54,7 +65,8 @@ passport.use(
     },
     async (_: unknown, __: unknown, profile, done) => {
       try {
-        const obj = {
+        let userData: UserData;
+        const obj: Omit<UserData, "id"> = {
           fullname: profile.displayName,
           avatarUrl: profile._json.photo_200,
           isActive: 0,
@@ -62,23 +74,35 @@ passport.use(
           phone: "",
         };
 
+        obj.token = createJWT(obj);
+
         const findUser = await User.findOne({
           where: {
             username: obj.username,
           },
         });
 
-        if (!findUser) {
+        console.log(userData);
+
+        if (!userData) {
           const user = await User.create(obj);
-          return done(null, user.toJSON());
+          userData = user.toJSON();
+        } else {
+          userData = await findUser.toJSON();
         }
 
-        done(null, findUser);
+        done(null, { ...userData, token: createJWT(userData) });
       } catch (error) {
         done(error);
       }
     }
   )
+);
+
+passport.use(
+  new JWTStrategy(opts, function (jwt_payload, done) {
+    console.log(jwt_payload);
+  })
 );
 
 passport.serializeUser(function (user, done) {

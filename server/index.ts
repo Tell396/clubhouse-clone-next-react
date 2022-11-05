@@ -1,34 +1,27 @@
 // Main for server logic
 import express from "express";
 import session from "express-session";
-import dotenv from "dotenv";
 
-// For feedback with client
-import cors from "cors";
-
-// For image input
-import multer from "multer";
 import * as crypto from "crypto";
+import multer from "multer";
 import sharp from "sharp";
-
-// For interaction with file system
 import fs from "fs";
+import cors from "cors";
+import dotenv from "dotenv";
 
 // Authentication
 import { passport } from "./core/passport";
 import Code from "./models/code";
 import { UserData } from "../client/pages/index";
-
 import Axios from "../client/core/axios";
+
+import "./core/db";
 
 declare global {
   namespace Express {
     interface User extends UserData {}
   }
 }
-
-// Conenct to databse
-import "./core/db";
 
 dotenv.config({
   path: "server/.env",
@@ -56,8 +49,8 @@ const uploader = multer({
 });
 
 app.use(cors());
-app.use(passport.initialize());
 app.use(express.json());
+app.use(passport.initialize());
 app.use(
   session({
     secret: "some very secret key",
@@ -91,32 +84,34 @@ app.post("/upload", uploader.single("photo"), (req, res) => {
 const generatePhoneCode = (max: number = 9999, min: number = 9999) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 
-app.get("/auth/sms", async (req, res) => {
-  const phone = req.query.phone;
-  const userId = 1;
-  const smsCode = generatePhoneCode();
+app.get(
+  "/auth/phone",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const phone = req.query.phone;
+    const userId = req.user.id;
+    const smsCode = generatePhoneCode();
 
-  if (!phone) {
-    return res.status(400).send();
+    if (!phone) {
+      return res.status(400).send();
+    }
+
+    try {
+      const data = await Axios.get(
+        `https://sms.ru/sms/send?api_id=${process.env.SMS_API_KEY}&to=${process.env.PHONE}&msg=${smsCode}`
+      );
+
+      await Code.create({
+        code: smsCode,
+        user_id: userId,
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Error",
+      });
+    }
   }
-
-  console.log(req.query);
-
-  try {
-    const data = await Axios.get(
-      `https://sms.ru/sms/send?api_id=${process.env.SMS_API_KEY}&to=${process.env.PHONE}&msg=${smsCode}`
-    );
-
-    // const code = Code.create({
-    //   code: smsCode,
-    //   user_id: userId,
-    // });
-  } catch (error) {
-    res.status(500).json({
-      message: "Error",
-    });
-  }
-});
+);
 
 app.get("/auth/github", passport.authenticate("github"));
 app.get(
@@ -143,6 +138,14 @@ app.get(
         window.close();
       </script>`
     );
+  }
+);
+
+app.get(
+  "/auth/jwt",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.send(req.user);
   }
 );
 
