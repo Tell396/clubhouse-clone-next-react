@@ -1,8 +1,7 @@
 import React from "react";
 import clsx from "clsx";
-import Cookies from "js-cookie";
 
-import { MainContext, UserData } from "../../../pages";
+import { MainContext } from "../../../pages";
 import { WhiteBlock } from "../../WhiteBlock";
 import { Button } from "../../Button";
 import { StepInfo } from "../../StepInfo";
@@ -36,11 +35,8 @@ export const SocialAuthStep: React.FC = () => {
       const user: string = data;
       if (typeof user === "string" && data.includes("avatarUrl")) {
         // Проверяем, строка-ли user: если да -- проверяет, включают-ли данные в себя avatarUrl
-        const json: UserData = JSON.parse(user);
         setUserData(JSON.parse(user));
         onNextStep();
-
-        Cookies.set("token", json.token);
       }
     });
   });

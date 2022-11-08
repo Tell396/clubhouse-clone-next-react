@@ -8,20 +8,15 @@
 ** Server [5/8]:
  * [ ] TODO Add auth with SMS step
  * [ ] Create login page
+ * [X] Add JWT
  * [X] Photo uploading bugfix (server)
  * [X] Add other (VK, Google) auth strategy
-		CLOSED: [2022-11-04 Пт 16:57]
  * [X] Move /https://localhost:3001/ on server files to `.env`
-		CLOSED: [2022-11-04 Пт 01:12]
  * [X] Bugfix on database
-		CLOSED: [2022-04-25 Вт 19:06]
  * [X] Rewrite all twitter part of code to github
-		CLOSED: [2022-04-25 Вт 21:34]
  * [X] Rewrite all components from JS to TS
-		CLOSED: [2022-03-25 Вт 12:38]
 		
 ** Client [1/3]:
- * [X] Photo uploading bugfix (client)
  * [ ] Create login page
  * [ ] Refactoring a part of code: [[file:client/components/steps/SocialAuthStep/index.tsx]]
 #+begin_src js
@@ -36,5 +31,5 @@
 		});
 	});
 #+end_src
+ * [X] Photo uploading bugfix (client)
  * [X] Add responsive for mobile and tablet
-		CLOSED: [2022-11-02 Ср 17:19]

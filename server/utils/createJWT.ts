@@ -1,8 +1,12 @@
 import jwt from "jsonwebtoken";
 import { reduce } from "lodash";
-import { UserData } from "../../client/pages";
 
-export const createJWT = (user: UserData): string => {
+interface ILoginData {
+  email: string;
+  password: string;
+}
+
+export default (user: ILoginData) => {
   const token = jwt.sign(
     {
       data: reduce(
